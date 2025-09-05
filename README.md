@@ -1,3 +1,12 @@
+Framework : Qbcore/Qbox
+
+## Usage
+
+### From Client Scripts
+
+You can start the minigame from **any client script** using the export:
+
+```lua
 exports['diamond_minigame']:StartDiamondMinigame({
     onSuccess = function()
         print("Player cracked the safe!")
