@@ -19,9 +19,9 @@ RegisterNUICallback("minigameResult", function(data, cb)
 end)
 
 -- Export function to start minigame and wait for result
-exports('StartDiamondMinigame', function()
+exports('StartDiamondMinigame', function(callbacks)
     if isMinigameActive then
-        return false -- already running
+        return false
     end
 
     isMinigameActive = true
@@ -36,16 +36,24 @@ exports('StartDiamondMinigame', function()
     while minigameResult == nil do
         Citizen.Wait(0)
         if GetGameTimer() - startTime > timeout then
-            -- timeout
             minigameResult = false
-            isMinigameActive = false
-            SetNuiFocus(false, false)
             break
         end
     end
 
+    SetNuiFocus(false, false)
+    isMinigameActive = false
+
+    -- Trigger callbacks
+    if minigameResult and callbacks and callbacks.onSuccess then
+        callbacks.onSuccess()
+    elseif not minigameResult and callbacks and callbacks.onFail then
+        callbacks.onFail()
+    end
+
     return minigameResult
 end)
+
 
 -- Command for manual testing
 RegisterCommand("startdiamondminigame", function()
