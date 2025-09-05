@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  background: transparent;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+#game {
+  position: absolute;
+  display:none;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 80px;
+}
+
+#progress-container {
+  position: relative;
+  width: 100%;
+  height: 20px;
+  background: #111;
+  border-radius: 12px;
+  box-shadow: 0 0 15px #6e33ff88 inset;
+  overflow: visible;
+}
+
+#progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #a64dff, #6e33ff);
+  border-radius: 12px;  /* full rounded corners */
+  box-shadow: 0 0 15px #a64dff;
+  transition: width 0.1s linear;
+  z-index: 2;
+}
+
+.diamond {
+  position: absolute;
+  top: 60%;
+  width: 38px;
+  height: 38px;
+  background: transparent;
+  border: 3px solid #a64dff;
+  box-shadow: 0 0 12px #a64dff;
+  transform: translate(-50%, -50%) rotate(45deg);
+  z-index: 3;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.diamond-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(180deg, #a64dff, #6e33ff);
+  box-shadow: 0 0 15px #a64dff;
+  border-radius: 0 0 8px 8px;
+  transition: height 0.1s linear;
+  z-index: 1;
+}
+
+.diamond.unlocked .diamond-fill {
+  background: linear-gradient(180deg, #ffffff, #dddddd);
+  box-shadow: 0 0 20px #ffffff;
+  transition: none;
+}
